@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080b14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Fit Quest">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Fit Quest ⚡</title>
+<style>
+:root{--bg:#070a12;--card:rgba(20,25,40,.82);--text:#f8fbff;--muted:#9ba7bd;--accent:#8b7cff;--accent2:#19e6b5;--line:rgba(255,255,255,.09)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 10% 0%,#20205a 0,transparent 30%),radial-gradient(circle at 90% 15%,#073e4a 0,transparent 28%),var(--bg);min-height:100vh}
+body:before{content:"";position:fixed;inset:-40%;background:conic-gradient(from 90deg,transparent,#6c5ce7,transparent,#00d9a6,transparent);filter:blur(100px);opacity:.12;animation:spin 18s linear infinite;pointer-events:none}@keyframes spin{to{transform:rotate(360deg)}}
+header{position:sticky;top:0;z-index:5;background:rgba(7,10,18,.72);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav{max-width:1050px;margin:auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between}.logo{font-weight:900;letter-spacing:.5px}.logo span{color:var(--accent2)}button{border:0;color:#fff;background:linear-gradient(135deg,var(--accent),#5c48ef);padding:10px 14px;border-radius:13px;font-weight:800;cursor:pointer;box-shadow:0 8px 25px rgba(108,92,231,.25)}
+main{max-width:1050px;margin:auto;padding:22px 18px 50px}.hero{padding:22px 0 8px}.eyebrow{color:var(--accent2);font-weight:800;font-size:13px;letter-spacing:1.5px}.hero h1{font-size:clamp(34px,8vw,62px);line-height:.98;margin:8px 0}.hero p{color:var(--muted);max-width:650px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px}.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 16px 45px rgba(0,0,0,.22);backdrop-filter:blur(12px)}.wide{grid-column:1/-1}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:16px;padding:13px}.stat b{display:block;font-size:24px}.small{font-size:12px;color:var(--muted)}
+.progress{height:12px;background:#252b3b;border-radius:99px;overflow:hidden;margin:12px 0}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px;transition:.35s}
+.task{display:flex;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}.task:last-child{border:0}.task input{width:20px;height:20px;accent-color:var(--accent2)}.done{text-decoration:line-through;color:#7d879b}
+.day{padding:13px;border-radius:14px;background:rgba(255,255,255,.035);margin:8px 0;border:1px solid var(--line)}.day b{color:#fff}.pill{display:inline-block;border-radius:999px;padding:5px 9px;background:rgba(139,124,255,.14);color:#cfc9ff;font-size:12px;font-weight:800}
+.meal{padding:13px;margin:8px 0;background:rgba(255,255,255,.035);border-radius:14px;border:1px solid var(--line)}input[type=number]{width:100%;padding:12px;margin-top:7px;border-radius:12px;border:1px solid var(--line);background:#0d111b;color:white;font-size:16px}
+.tip{border-left:3px solid var(--accent2);padding-left:12px;color:#c8d1df}footer{text-align:center;color:var(--muted);padding:30px 0}
+@media(max-width:500px){.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div class="logo">⚡ FIT <span>QUEST</span></div><button id="reset">Reset day</button></div></header>
+<main>
+<section class="hero"><div class="eyebrow">YOUR PERSONAL FITNESS DASHBOARD</div><h1>Build strength.<br>Build habits. 🔥</h1><p>A flashy, beginner-friendly plan for getting stronger and supporting healthy growth while you're still developing.</p></section>
+
+<section class="card wide">
+<div class="stats">
+<div class="stat"><span class="small">TODAY</span><b id="done">0/6</b><span class="small">tasks complete</span></div>
+<div class="stat"><span class="small">STREAK</span><b id="streak">0 🔥</b><span class="small">completed days</span></div>
+<div class="stat"><span class="small">SLEEP</span><b id="sleepStat">—</b><span class="small">hours</span></div>
+</div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<div id="tasks"></div>
+</section>
+
+<section class="grid">
+<div class="card"><h2>🏋️ Weekly mission</h2>
+<div class="day"><b>MON — FULL BODY</b><p>Squats 3×10<br>Push-ups 3×6–12<br>Backpack rows 3×10<br>Reverse lunges 2×8/leg<br>Plank 3×20–40 sec</p></div>
+<div class="day"><b>TUE — SPORT</b><p>Football, cycling, swimming or brisk walking for about 30–60 min.</p></div>
+<div class="day"><b>WED — RECOVERY</b><p>Rest and normal daily movement.</p></div>
+<div class="day"><b>THU — FULL BODY</b><p>Squats 3×10–15<br>Push-ups 3×6–12<br>Backpack rows 3×10–15<br>Glute bridges 3×12<br>Dead bugs 3×8/side</p></div>
+<div class="day"><b>FRI — SPORT</b><p>30–60 min of something you enjoy.</p></div>
+<div class="day"><b>SAT/SUN</b><p>Saturday: optional easy activity. Sunday: rest.</p></div>
+</div>
+
+<div class="card"><h2>🍽️ Fuel guide</h2>
+<div class="meal"><span class="pill">BREAKFAST</span><br>Eggs + whole-grain bread + fruit, or oatmeal + milk/yogurt + banana.</div>
+<div class="meal"><span class="pill">LUNCH</span><br>Protein + rice/pasta/potatoes/bread + vegetables + fruit.</div>
+<div class="meal"><span class="pill">SNACK</span><br>Fruit + yogurt, milk + banana, sandwich, or nuts + fruit.</div>
+<div class="meal"><span class="pill">DINNER</span><br>Protein + a carbohydrate + vegetables.</div>
+<p class="tip">No calorie counting or intentional food restriction. At your age, regular balanced meals help provide energy for school, activity and normal growth.</p>
+</div>
+
+<div class="card"><h2>😴 Sleep tracker</h2><p>Aim for <b>8–10 hours</b> each night.</p>
+<input id="sleep" type="number" min="0" max="15" step=".5" placeholder="Hours slept">
+<p id="sleepMsg" class="small"></p></div>
+
+<div class="card"><h2>📏 Growth log</h2><p>Optional: record your height occasionally, under similar conditions. Look at changes over months, not day-to-day.</p>
+<input id="height" type="number" min="50" max="230" placeholder="Height in cm">
+<p id="heightMsg" class="small"></p>
+<p class="tip">There is no exercise or food that can guarantee extra height. Genetics and puberty are the biggest factors; sleep, nutrition and activity help support normal development.</p></div>
+</section>
+
+<section class="card wide"><h2>⚡ Quest rules</h2>
+<p>Start easy • Learn technique • Increase difficulty gradually • Rest when needed • Stop if you feel sharp pain, dizzy or unwell • Focus on being stronger and healthier rather than chasing an anime body.</p></section>
+<footer>FIT QUEST • Made for your fitness journey</footer>
+</main>
+<script>
+const KEY="fitQuestV2";
+const taskNames=["Complete today's planned workout or sport","Eat breakfast","Eat lunch","Eat dinner","Do some movement","Get ready for 8–10 hours of sleep"];
+let data=JSON.parse(localStorage.getItem(KEY)||'{"tasks":[false,false,false,false,false,false],"sleep":"","height":"","streak":0}');
+const tasks=document.getElementById("tasks");
+function render(){
+ tasks.innerHTML="";
+ data.tasks.forEach((checked,i)=>{
+  const row=document.createElement("div");row.className="task";
+  row.innerHTML=`<input type="checkbox" ${checked?"checked":""}><span class="${checked?"done":""}">${taskNames[i]}</span>`;
+  row.querySelector("input").onchange=e=>{data.tasks[i]=e.target.checked;save();render()};
+  tasks.appendChild(row);
+ });
+ const n=data.tasks.filter(Boolean).length;
+ document.getElementById("done").textContent=n+"/6";
+ document.getElementById("bar").style.width=(n/6*100)+"%";
+ document.getElementById("streak").textContent=(data.streak||0)+" 🔥";
+ document.getElementById("sleepStat").textContent=data.sleep?data.sleep+"h":"—";
+ document.getElementById("sleep").value=data.sleep;
+ document.getElementById("height").value=data.height;
+}
+function save(){localStorage.setItem(KEY,JSON.stringify(data));}
+document.getElementById("sleep").oninput=e=>{data.sleep=e.target.value;save();render();document.getElementById("sleepMsg").textContent=e.target.value>=8&&e.target.value<=10?"Nice — you're in the target range.":e.target.value?"Try to build toward 8–10 hours.":""};
+document.getElementById("height").oninput=e=>{data.height=e.target.value;save();document.getElementById("heightMsg").textContent=e.target.value?"Saved on this device.":"";
+};
+document.getElementById("reset").onclick=()=>{data.tasks=[false,false,false,false,false,false];save();render()};
+render();
+</script>
+</body></html>

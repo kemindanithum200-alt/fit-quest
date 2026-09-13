@@ -1,0 +1,9 @@
+{
+  "name":"Fit Quest",
+  "short_name":"Fit Quest",
+  "start_url":"./index.html",
+  "display":"standalone",
+  "background_color":"#070a12",
+  "theme_color":"#080b14",
+  "description":"A beginner-friendly fitness, food and sleep dashboard."
+}
