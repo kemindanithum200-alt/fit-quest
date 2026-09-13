@@ -7,98 +7,245 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Fit Quest">
+<link rel="apple-touch-icon" href="icon.png">
 <link rel="manifest" href="manifest.webmanifest">
 <title>Fit Quest ⚡</title>
 <style>
-:root{--bg:#070a12;--card:rgba(20,25,40,.82);--text:#f8fbff;--muted:#9ba7bd;--accent:#8b7cff;--accent2:#19e6b5;--line:rgba(255,255,255,.09)}
+:root{--bg:#070a12;--card:rgba(20,25,40,.84);--text:#f8fbff;--muted:#9ba7bd;--a:#8b7cff;--b:#19e6b5;--line:rgba(255,255,255,.09)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 10% 0%,#20205a 0,transparent 30%),radial-gradient(circle at 90% 15%,#073e4a 0,transparent 28%),var(--bg);min-height:100vh}
 body:before{content:"";position:fixed;inset:-40%;background:conic-gradient(from 90deg,transparent,#6c5ce7,transparent,#00d9a6,transparent);filter:blur(100px);opacity:.12;animation:spin 18s linear infinite;pointer-events:none}@keyframes spin{to{transform:rotate(360deg)}}
-header{position:sticky;top:0;z-index:5;background:rgba(7,10,18,.72);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
-.nav{max-width:1050px;margin:auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between}.logo{font-weight:900;letter-spacing:.5px}.logo span{color:var(--accent2)}button{border:0;color:#fff;background:linear-gradient(135deg,var(--accent),#5c48ef);padding:10px 14px;border-radius:13px;font-weight:800;cursor:pointer;box-shadow:0 8px 25px rgba(108,92,231,.25)}
-main{max-width:1050px;margin:auto;padding:22px 18px 50px}.hero{padding:22px 0 8px}.eyebrow{color:var(--accent2);font-weight:800;font-size:13px;letter-spacing:1.5px}.hero h1{font-size:clamp(34px,8vw,62px);line-height:.98;margin:8px 0}.hero p{color:var(--muted);max-width:650px}
+header{position:sticky;top:0;z-index:5;background:rgba(7,10,18,.74);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav{max-width:1050px;margin:auto;padding:14px 18px;display:flex;align-items:center;justify-content:space-between}.logo{font-weight:900;letter-spacing:.5px}.logo span{color:var(--b)}
+button{border:0;color:#fff;background:linear-gradient(135deg,var(--a),#5c48ef);padding:10px 14px;border-radius:13px;font-weight:800;cursor:pointer;box-shadow:0 8px 25px rgba(108,92,231,.25)}
+main{max-width:1050px;margin:auto;padding:22px 18px 50px}.hero{padding:22px 0 8px}.eyebrow{color:var(--b);font-weight:800;font-size:13px;letter-spacing:1.5px}.hero h1{font-size:clamp(34px,8vw,62px);line-height:.98;margin:8px 0}.hero p{color:var(--muted);max-width:700px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px}.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 16px 45px rgba(0,0,0,.22);backdrop-filter:blur(12px)}.wide{grid-column:1/-1}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:16px;padding:13px}.stat b{display:block;font-size:24px}.small{font-size:12px;color:var(--muted)}
-.progress{height:12px;background:#252b3b;border-radius:99px;overflow:hidden;margin:12px 0}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:99px;transition:.35s}
-.task{display:flex;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}.task:last-child{border:0}.task input{width:20px;height:20px;accent-color:var(--accent2)}.done{text-decoration:line-through;color:#7d879b}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:16px;padding:13px}.stat b{display:block;font-size:23px}.small{font-size:12px;color:var(--muted)}
+.progress{height:12px;background:#252b3b;border-radius:99px;overflow:hidden;margin:12px 0}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--a),var(--b));border-radius:99px;transition:.35s}
+.task{display:flex;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}.task:last-child{border:0}.task input{width:20px;height:20px;accent-color:var(--b)}.done{text-decoration:line-through;color:#7d879b}
 .day{padding:13px;border-radius:14px;background:rgba(255,255,255,.035);margin:8px 0;border:1px solid var(--line)}.day b{color:#fff}.pill{display:inline-block;border-radius:999px;padding:5px 9px;background:rgba(139,124,255,.14);color:#cfc9ff;font-size:12px;font-weight:800}
-.meal{padding:13px;margin:8px 0;background:rgba(255,255,255,.035);border-radius:14px;border:1px solid var(--line)}input[type=number]{width:100%;padding:12px;margin-top:7px;border-radius:12px;border:1px solid var(--line);background:#0d111b;color:white;font-size:16px}
-.tip{border-left:3px solid var(--accent2);padding-left:12px;color:#c8d1df}footer{text-align:center;color:var(--muted);padding:30px 0}
-@media(max-width:500px){.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:1/-1}}
+.meal,.choice{padding:13px;margin:8px 0;background:rgba(255,255,255,.035);border-radius:14px;border:1px solid var(--line)}
+input[type=number],input[type=time],select{width:100%;padding:12px;margin-top:7px;border-radius:12px;border:1px solid var(--line);background:#0d111b;color:white;font-size:16px}
+.choice{cursor:pointer}.choice input{margin-right:8px}.tip{border-left:3px solid var(--b);padding-left:12px;color:#c8d1df}
+.badges{display:flex;flex-wrap:wrap;gap:9px}.badge{padding:10px 12px;border-radius:15px;background:rgba(255,255,255,.05);border:1px solid var(--line);opacity:.4}.badge.on{opacity:1;box-shadow:0 0 20px rgba(139,124,255,.18)}
+.xp{height:10px;background:#252b3b;border-radius:99px;overflow:hidden}.xp>div{height:100%;width:0;background:linear-gradient(90deg,#ffd166,var(--b))}
+.chart{display:flex;align-items:flex-end;gap:8px;height:150px;padding-top:10px}.col{flex:1;text-align:center;font-size:10px;color:var(--muted)}.col i{display:block;height:100px;max-height:100px;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,var(--a),var(--b));margin-bottom:5px}
+footer{text-align:center;color:var(--muted);padding:30px 0}
+@media(max-width:650px){.stats{grid-template-columns:1fr 1fr}.stats .stat:last-child{grid-column:auto}}
+@media(max-width:420px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header><div class="nav"><div class="logo">⚡ FIT <span>QUEST</span></div><button id="reset">Reset day</button></div></header>
+<header><div class="nav"><div class="logo">⚡ FIT <span>QUEST</span></div><button id="reset">Reset today</button></div></header>
 <main>
-<section class="hero"><div class="eyebrow">YOUR PERSONAL FITNESS DASHBOARD</div><h1>Build strength.<br>Build habits. 🔥</h1><p>A flashy, beginner-friendly plan for getting stronger and supporting healthy growth while you're still developing.</p></section>
+<section class="hero">
+<div class="eyebrow">FIT QUEST • LEVEL UP YOUR HABITS</div>
+<h1>Build strength.<br>Build habits. 🔥</h1>
+<p>A beginner-friendly fitness game for healthy habits, recovery and progress. No body ratings, calorie counting or extreme goals.</p>
+</section>
 
 <section class="card wide">
 <div class="stats">
-<div class="stat"><span class="small">TODAY</span><b id="done">0/6</b><span class="small">tasks complete</span></div>
-<div class="stat"><span class="small">STREAK</span><b id="streak">0 🔥</b><span class="small">completed days</span></div>
+<div class="stat"><span class="small">TODAY</span><b id="done">0/8</b><span class="small">quests complete</span></div>
+<div class="stat"><span class="small">LEVEL</span><b id="level">1</b><span class="small">XP <span id="xp">0</span></span></div>
+<div class="stat"><span class="small">STREAK</span><b id="streak">0 🔥</b><span class="small">days</span></div>
 <div class="stat"><span class="small">SLEEP</span><b id="sleepStat">—</b><span class="small">hours</span></div>
 </div>
+<div class="xp"><div id="xpbar"></div></div>
 <div class="progress"><div class="bar" id="bar"></div></div>
+</section>
+
+<section class="card">
+<h2>🎯 Daily Quests</h2>
 <div id="tasks"></div>
+<p class="small">Complete the quests that fit your day. Rest days are allowed.</p>
 </section>
 
-<section class="grid">
-<div class="card"><h2>🏋️ Weekly mission</h2>
-<div class="day"><b>MON — FULL BODY</b><p>Squats 3×10<br>Push-ups 3×6–12<br>Backpack rows 3×10<br>Reverse lunges 2×8/leg<br>Plank 3×20–40 sec</p></div>
-<div class="day"><b>TUE — SPORT</b><p>Football, cycling, swimming or brisk walking for about 30–60 min.</p></div>
-<div class="day"><b>WED — RECOVERY</b><p>Rest and normal daily movement.</p></div>
-<div class="day"><b>THU — FULL BODY</b><p>Squats 3×10–15<br>Push-ups 3×6–12<br>Backpack rows 3×10–15<br>Glute bridges 3×12<br>Dead bugs 3×8/side</p></div>
-<div class="day"><b>FRI — SPORT</b><p>30–60 min of something you enjoy.</p></div>
-<div class="day"><b>SAT/SUN</b><p>Saturday: optional easy activity. Sunday: rest.</p></div>
-</div>
-
-<div class="card"><h2>🍽️ Fuel guide</h2>
-<div class="meal"><span class="pill">BREAKFAST</span><br>Eggs + whole-grain bread + fruit, or oatmeal + milk/yogurt + banana.</div>
-<div class="meal"><span class="pill">LUNCH</span><br>Protein + rice/pasta/potatoes/bread + vegetables + fruit.</div>
-<div class="meal"><span class="pill">SNACK</span><br>Fruit + yogurt, milk + banana, sandwich, or nuts + fruit.</div>
-<div class="meal"><span class="pill">DINNER</span><br>Protein + a carbohydrate + vegetables.</div>
-<p class="tip">No calorie counting or intentional food restriction. At your age, regular balanced meals help provide energy for school, activity and normal growth.</p>
-</div>
-
-<div class="card"><h2>😴 Sleep tracker</h2><p>Aim for <b>8–10 hours</b> each night.</p>
-<input id="sleep" type="number" min="0" max="15" step=".5" placeholder="Hours slept">
-<p id="sleepMsg" class="small"></p></div>
-
-<div class="card"><h2>📏 Growth log</h2><p>Optional: record your height occasionally, under similar conditions. Look at changes over months, not day-to-day.</p>
-<input id="height" type="number" min="50" max="230" placeholder="Height in cm">
-<p id="heightMsg" class="small"></p>
-<p class="tip">There is no exercise or food that can guarantee extra height. Genetics and puberty are the biggest factors; sleep, nutrition and activity help support normal development.</p></div>
+<section class="card">
+<h2>🏆 Achievements</h2>
+<div class="badges" id="badges"></div>
 </section>
 
-<section class="card wide"><h2>⚡ Quest rules</h2>
-<p>Start easy • Learn technique • Increase difficulty gradually • Rest when needed • Stop if you feel sharp pain, dizzy or unwell • Focus on being stronger and healthier rather than chasing an anime body.</p></section>
-<footer>FIT QUEST • Made for your fitness journey</footer>
+<section class="card">
+<h2>📊 Weekly Progress</h2>
+<div class="chart" id="chart"></div>
+<p class="small">This tracks completed quests, not body appearance.</p>
+</section>
+
+<section class="card">
+<h2>🧠 Daily Wellness Check-in</h2>
+<p>Instead of rating your body, rate how you're feeling today. This is about health, not appearance.</p>
+<div class="choice"><label><input type="radio" name="well" value="1"> 😕 Low</label></div>
+<div class="choice"><label><input type="radio" name="well" value="2"> 😐 Okay</label></div>
+<div class="choice"><label><input type="radio" name="well" value="3"> 🙂 Good</label></div>
+<div class="choice"><label><input type="radio" name="well" value="4"> 😄 Great</label></div>
+<div class="choice"><label><input type="radio" name="well" value="5"> ⚡ Amazing</label></div>
+<p id="wellMsg" class="tip"></p>
+</section>
+
+<section class="card">
+<h2>🏋️ Workout Missions</h2>
+<div class="day"><b>MONDAY — Full Body</b><br>Squats • wall/incline push-ups • glute bridges • easy plank</div>
+<div class="day"><b>TUESDAY — Recovery</b><br>Easy walk + gentle stretching</div>
+<div class="day"><b>WEDNESDAY — Full Body</b><br>Repeat Monday at a comfortable pace</div>
+<div class="day"><b>THURSDAY — Recovery</b><br>Easy movement + rest</div>
+<div class="day"><b>FRIDAY — Full Body</b><br>Repeat Monday, focusing on good form</div>
+<div class="day"><b>SATURDAY — Fun Movement</b><br>Football, cycling, dancing, walking or another activity you enjoy</div>
+<div class="day"><b>SUNDAY — Rest</b><br>Recover, sleep and prepare for the week</div>
+</section>
+
+<section class="card">
+<h2>💧 Water Quest</h2>
+<p>Keep water nearby and drink regularly, especially when active or thirsty.</p>
+<label>Glasses/cups logged today
+<input id="water" type="number" min="0" max="30" step="1" placeholder="0">
+</label>
+</section>
+
+<section class="card">
+<h2>😴 Sleep Tracker</h2>
+<label>Hours slept last night
+<input id="sleep" type="number" min="0" max="16" step=".5" placeholder="8">
+</label>
+<p class="small">Teens generally need around 8–10 hours of sleep each night.</p>
+</section>
+
+<section class="card">
+<h2>🌱 Growth Notes</h2>
+<p>Growing happens naturally during development. There is no workout or food that can guarantee extra height.</p>
+<label>Optional note for today
+<input id="growth" type="text" maxlength="120" placeholder="How did I feel today?">
+</label>
+</section>
+
+<section class="card">
+<h2>🔔 Reminder</h2>
+<p>Set a time to remind yourself about your daily quests. Your browser may ask for notification permission.</p>
+<input id="reminderTime" type="time">
+<button id="saveReminder">Save reminder</button>
+<p id="reminderMsg" class="small"></p>
+</section>
+
+<section class="card">
+<h2>🥗 Balanced Food Guide</h2>
+<div class="meal"><b>Breakfast</b><br>Oats/cereal + milk or yogurt + fruit</div>
+<div class="meal"><b>Lunch</b><br>Rice/pasta/bread + vegetables + a protein food</div>
+<div class="meal"><b>Snack</b><br>Fruit + yogurt, cheese, nuts, or another normal snack</div>
+<div class="meal"><b>Dinner</b><br>A normal family meal with a mix of carbohydrates, protein and vegetables</div>
+<p class="tip">No calorie counting or intentional food restriction. Your body needs enough food and nutrients while you're growing.</p>
+</section>
+
+<section class="card wide">
+<h2>⚡ Your Rules</h2>
+<p>Consistency beats perfection. Take rest days. Learn good technique. Eat regular balanced meals. Sleep well. Ask a parent/guardian or health professional if you have questions about your growth or exercise.</p>
+</section>
+
+<footer>Fit Quest v2 • Built for healthy habits, not body comparison 💚</footer>
 </main>
+
 <script>
 const KEY="fitQuestV2";
-const taskNames=["Complete today's planned workout or sport","Eat breakfast","Eat lunch","Eat dinner","Do some movement","Get ready for 8–10 hours of sleep"];
-let data=JSON.parse(localStorage.getItem(KEY)||'{"tasks":[false,false,false,false,false,false],"sleep":"","height":"","streak":0}');
-const tasks=document.getElementById("tasks");
-function render(){
- tasks.innerHTML="";
- data.tasks.forEach((checked,i)=>{
-  const row=document.createElement("div");row.className="task";
-  row.innerHTML=`<input type="checkbox" ${checked?"checked":""}><span class="${checked?"done":""}">${taskNames[i]}</span>`;
-  row.querySelector("input").onchange=e=>{data.tasks[i]=e.target.checked;save();render()};
-  tasks.appendChild(row);
+const taskList=[
+["move","🏃 Move your body for a while"],
+["workout","🏋️ Do today's workout OR choose recovery"],
+["water","💧 Drink water regularly"],
+["food","🥗 Eat regular balanced meals"],
+["sleep","😴 Get a good night's sleep"],
+["well","🧠 Complete your wellness check-in"],
+["break","🌿 Take a real break / recovery moment"],
+["ready","🎯 Prepare one small goal for tomorrow"]
+];
+const defaultState={days:{}, xp:0, streak:0, water:0, sleep:"", growth:"", reminder:"", well:0};
+let state=JSON.parse(localStorage.getItem(KEY)||"null")||defaultState;
+const dateKey=()=>new Date().toISOString().slice(0,10);
+function today(){if(!state.days[dateKey()]) state.days[dateKey()]={}; return state.days[dateKey()]}
+function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+function renderTasks(){
+ const t=today(), box=document.getElementById("tasks"); box.innerHTML="";
+ taskList.forEach(([id,label])=>{
+  const row=document.createElement("div"); row.className="task";
+  const cb=document.createElement("input"); cb.type="checkbox"; cb.checked=!!t[id];
+  const span=document.createElement("span"); span.textContent=label; if(cb.checked) span.className="done";
+  cb.onchange=()=>{t[id]=cb.checked; span.className=cb.checked?"done":""; save(); update()};
+  row.append(cb,span); box.appendChild(row);
  });
- const n=data.tasks.filter(Boolean).length;
- document.getElementById("done").textContent=n+"/6";
- document.getElementById("bar").style.width=(n/6*100)+"%";
- document.getElementById("streak").textContent=(data.streak||0)+" 🔥";
- document.getElementById("sleepStat").textContent=data.sleep?data.sleep+"h":"—";
- document.getElementById("sleep").value=data.sleep;
- document.getElementById("height").value=data.height;
 }
-function save(){localStorage.setItem(KEY,JSON.stringify(data));}
-document.getElementById("sleep").oninput=e=>{data.sleep=e.target.value;save();render();document.getElementById("sleepMsg").textContent=e.target.value>=8&&e.target.value<=10?"Nice — you're in the target range.":e.target.value?"Try to build toward 8–10 hours.":""};
-document.getElementById("height").oninput=e=>{data.height=e.target.value;save();document.getElementById("heightMsg").textContent=e.target.value?"Saved on this device.":"";
+function completed(){return taskList.filter(x=>today()[x[0]]).length}
+function update(){
+ const n=completed(), total=taskList.length;
+ document.getElementById("done").textContent=n+"/"+total;
+ document.getElementById("bar").style.width=(n/total*100)+"%";
+ const xp=state.xp||0, level=Math.floor(xp/100)+1, within=xp%100;
+ document.getElementById("level").textContent=level;
+ document.getElementById("xp").textContent=xp;
+ document.getElementById("xpbar").style.width=within+"%";
+ document.getElementById("streak").textContent=(state.streak||0)+" 🔥";
+ document.getElementById("sleepStat").textContent=state.sleep?state.sleep:"—";
+ renderBadges(level,n); renderChart();
+}
+function renderBadges(level,n){
+ const arr=[
+  ["🌱","First Quest",state.xp>=10],
+  ["🔥","3 Day Streak",(state.streak||0)>=3],
+  ["⚡","Level 5",level>=5],
+  ["🏆","Level 10",level>=10],
+  ["💚","Healthy Habits",state.xp>=250]
+ ];
+ const box=document.getElementById("badges"); box.innerHTML="";
+ arr.forEach(([icon,name,on])=>{let d=document.createElement("div");d.className="badge"+(on?" on":"");d.textContent=icon+" "+name;box.appendChild(d)});
+}
+function renderChart(){
+ const box=document.getElementById("chart"); box.innerHTML="";
+ for(let i=6;i>=0;i--){
+  const d=new Date();d.setDate(d.getDate()-i);const k=d.toISOString().slice(0,10);
+  const obj=state.days[k]||{}; const count=taskList.filter(x=>obj[x[0]]).length;
+  const col=document.createElement("div");col.className="col";
+  const bar=document.createElement("i");bar.style.height=Math.max(6,count/taskList.length*100)+"px";
+  const lab=document.createElement("span");lab.textContent=d.toLocaleDateString(undefined,{weekday:"short"}).slice(0,3);
+  col.append(bar,lab);box.appendChild(col);
+ }
+}
+function refreshStreak(){
+ let s=0;
+ for(let i=0;i<365;i++){
+  const d=new Date();d.setDate(d.getDate()-i);const k=d.toISOString().slice(0,10);
+  const obj=state.days[k]||{};const c=taskList.filter(x=>obj[x[0]]).length;
+  if(c>=Math.ceil(taskList.length*.75)) s++; else break;
+ }
+ state.streak=s;
+}
+document.querySelectorAll('input[name="well"]').forEach(r=>r.onchange=()=>{
+ today().well=+r.value; state.well=+r.value;
+ const msg=["","Take it easy today and talk to someone you trust if you need support.","An okay day is still a day.","Nice — keep looking after yourself.","Great! Keep the habits going.","Awesome energy — use it for something you enjoy!"][+r.value];
+ document.getElementById("wellMsg").textContent=msg;
+ if(!today().wellTaskAwarded){today().wellTaskAwarded=true; state.xp+=5;}
+ save(); update();
+});
+document.getElementById("water").onchange=e=>{state.water=Math.max(0,+e.target.value||0);save()};
+document.getElementById("sleep").onchange=e=>{state.sleep=e.target.value;save();update()};
+document.getElementById("growth").onchange=e=>{state.growth=e.target.value;save()};
+document.getElementById("saveReminder").onclick=()=>{
+ state.reminder=document.getElementById("reminderTime").value;save();
+ document.getElementById("reminderMsg").textContent=state.reminder?("Reminder saved for "+state.reminder+"."): "No reminder set.";
+ if("Notification" in window && Notification.permission==="default") Notification.requestPermission().catch(()=>{});
 };
-document.getElementById("reset").onclick=()=>{data.tasks=[false,false,false,false,false,false];save();render()};
-render();
+document.getElementById("reset").onclick=()=>{
+ if(confirm("Reset today's quests?")){state.days[dateKey()]={};save();renderTasks();update()}
+};
+function awardForCompleted(){
+ const t=today(), count=completed();
+ const key="award_"+dateKey();
+ const old=+localStorage.getItem(key)||0;
+ if(count>old){state.xp+=(count-old)*10;localStorage.setItem(key,count);save()}
+}
+setInterval(()=>{awardForCompleted();refreshStreak();update()},1000);
+document.getElementById("water").value=state.water||0;
+document.getElementById("sleep").value=state.sleep||"";
+document.getElementById("growth").value=state.growth||"";
+document.getElementById("reminderTime").value=state.reminder||"";
+if(state.reminder)document.getElementById("reminderMsg").textContent="Reminder saved for "+state.reminder+".";
+const w=today().well||0;if(w){const r=document.querySelector('input[name="well"][value="'+w+'"]');if(r)r.checked=true}
+refreshStreak();renderTasks();update();
+if("serviceWorker" in navigator){navigator.serviceWorker.register("service-worker.js").catch(()=>{})}
 </script>
-</body></html>
+</body>
+</html>
